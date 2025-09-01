@@ -13,13 +13,13 @@ services:
     networks:
       - "app-tier"
     volumes:
-      - /Users/marulisihotang/Documents/app-jisdac/database:/bitnami/mysql/data
+      - ./database:/bitnami/mysql/data
   
   backend:
     image: nginx
     volumes:
-      - /Users/marulisihotang/Documents/app-jisdac/backend:/usr/share/nginx/html
-      - /Users/marulisihotang/Documents/app-jisdac/backend/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./backend:/usr/share/nginx/html
+      - ./backend/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - "app-tier"
     depends_on:
@@ -30,7 +30,7 @@ services:
   frontend:
     image: nginx
     volumes:
-      - /Users/marulisihotang/Documents/app-jisdac/frontend:/usr/share/nginx/html
+      - ./frontend:/usr/share/nginx/html
     ports:
       - "8080:80"
     depends_on:
