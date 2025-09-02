@@ -33,6 +33,7 @@ coverage/
 # Env files
 .env
 .env.*.local
+.sequelizerc
 
 # IDE / Editor settings
 .vscode/
