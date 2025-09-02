@@ -8,7 +8,6 @@ services:
     image: mysql:lts
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      # - MYSQL_HOST='0.0.0.0'
     ports:
       - "3306:3306"
     # expose:
@@ -18,16 +17,25 @@ services:
     volumes:
       - ./database:/var/lib/mysql
 
-  # backend:
-  #   image: leorance/jisdac-node:v1.1
-  #   networks:
-  #     - "app-tier"
-  #   depends_on:
-  #     - database
-  #   ports:
-  #     - "3000:3000"
-  #   # expose:
-  #   #   - 3000
+  backend:
+    image: leorance/jisdac-node:v2.0
+    networks:
+      - "app-tier"
+    environment:
+      - APP_NAME=jisdacapp
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_HOSTNAME=database
+      - DB_NAME=sample
+      - DB_DIALECT=mysql
+      - DB_PORT=3306
+      - NODE_ENV=production
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    # expose:
+    #   - 3000
 
   frontend:
     image: nginx
