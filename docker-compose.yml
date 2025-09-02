@@ -5,9 +5,10 @@ networks:
 
 services:
   database:
-    image: bitnami/mysql:latest
+    image: mysql:lts
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      # - MYSQL_HOST='0.0.0.0'
     ports:
       - "3306:3306"
     # expose:
@@ -15,7 +16,7 @@ services:
     networks:
       - "app-tier"
     volumes:
-      - ./database:/bitnami/mysql/data
+      - ./database:/var/lib/mysql
 
   backend:
     image: leorance/jisdac-node:v1.1
