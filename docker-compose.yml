@@ -10,16 +10,18 @@ services:
     platform: linux/x86_64
     environment:
       - MYSQL_ROOT_PASSWORD=root
-    expose:
-      - 3306
+    ports:
+      - "3306:3306"
+    # expose:
+    #   - 3306
     networks:
       - "app-tier"
     volumes:
       - ./database:/var/lib/mysql
 
   backend:
-    image: leorance/jisdac-node:v2.2
-    platform: linux/x86_64
+    image: leorance/jisdac-node:v3.0
+    # platform: linux/x86_64
     restart: always
     networks:
       - "app-tier"
@@ -34,17 +36,19 @@ services:
       - NODE_ENV=production
     depends_on:
       - database
-    expose:
-      - 3000
-
-  frontend:
-    image: leorance/jisdac-frontend:v1.3
-    platform: linux/x86_64
-    restart: always
-    networks:
-      - "app-tier"
     ports:
-      - "1000:3000"
-    depends_on:
-      - database
-      - backend
+      - "1001:3000"
+    # expose:
+    #   - 3000
+
+  # frontend:
+  #   image: leorance/jisdac-frontend:v1.3
+  #   platform: linux/x86_64
+  #   restart: always
+  #   networks:
+  #     - "app-tier"
+  #   ports:
+  #     - "1000:3000"
+  #   depends_on:
+  #     - database
+  #     - backend
