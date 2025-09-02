@@ -28,7 +28,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
       <div className="w-full max-w-4xl bg-white shadow-lg rounded-2xl p-6">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">
-          {apiUrl}
+          <h2>Tabel Mahasiswa</h2>
         </h1>
 
         {loading ? (
