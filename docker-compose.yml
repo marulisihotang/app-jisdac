@@ -6,6 +6,8 @@ networks:
 services:
   database:
     image: mysql:lts
+    restart: always
+    platform: linux/x86_64
     environment:
       - MYSQL_ROOT_PASSWORD=root
     expose:
@@ -17,6 +19,8 @@ services:
 
   backend:
     image: leorance/jisdac-node:v2.2
+    platform: linux/x86_64
+    restart: always
     networks:
       - "app-tier"
     environment:
@@ -35,10 +39,12 @@ services:
 
   frontend:
     image: leorance/jisdac-frontend:v1.3
+    platform: linux/x86_64
+    restart: always
     networks:
       - "app-tier"
     ports:
-      - "80:3000"
+      - "1000:3000"
     depends_on:
       - database
       - backend
